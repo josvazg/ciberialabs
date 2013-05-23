@@ -1,13 +1,13 @@
 package webwallet
 
 import (
-	"appengine"
-	"appengine/datastore"
-	"appengine/user"
+	//"appengine"
+	//"appengine/datastore"
+	//"appengine/user"
 	"fmt"
-	"html/template"
+	//"html/template"
 	"net/http"
-	"time"
+	//"time"
 )
 
 /*var templates = template.Must(template.ParseFiles("html/browse.html", "html/add.html",
@@ -20,6 +20,7 @@ func init() {
 }
 
 func landingpage(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
+	//c := appengine.NewContext(r)
+	 fmt.Fprint(w, "Hello, world!")
 }
 
