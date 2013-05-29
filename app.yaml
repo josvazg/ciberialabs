@@ -4,5 +4,28 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /css
+  static_dir: static/css
+  expiration: "7d"
+
+- url: /images
+  static_dir: static/images
+  expiration: "7d"
+  
+- url: /js
+  static_dir: static/js
+  expiration: "7d"
+
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+  mime_type: image/x-icon
+
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: static/robots.txt
+  mime_type: text/plain
+
 - url: /.*
   script: _go_app
+
