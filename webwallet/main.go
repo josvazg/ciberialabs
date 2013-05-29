@@ -16,47 +16,50 @@ const (
 //initialize function
 func init() {
 	http.HandleFunc("/", mainHandler)
-	http.HandleFunc("/about", aboutHandler)
+	//http.HandleFunc("/about", aboutHandler)
 
 }
-
-/*
-type InterfaceRequestHandler interface {
-	HandleRequest(w http.ResponseWriter, r *http.Request)
-}
-*/
 
 //http request handler
 type RequestHandler struct {
-	MyContext  appengine.Context
-	MyUser     user.User
+	Context    *appengine.Context
+	User       *user.User
 	Google_url string
+}
+
+func NewRequestHandler(w http.ResponseWriter, r *http.Request) *RequestHandler {
+	handler := new(RequestHandler)
+
+	c := appengine.NewContext(r)
+
+	if c != nil {
+
+		u := user.Current(c)
+
+		if c != nil {
+			handler.Context = &c
+		}
+
+		if u != nil {
+			handler.User = u
+			handler.Google_url, _ = user.LogoutURL(c, "/")
+
+		} else {
+			handler.Google_url, _ = user.LoginURL(c, "/")
+
+		}
+
+	}
+
+	return handler
+
 }
 
 //handle request
 func (handler *RequestHandler) HandleRequest(w http.ResponseWriter, r *http.Request) {
+	c := &handler.Context
 
-}
-
-//main handler
-func mainHandler(w http.ResponseWriter, r *http.Request) {
-	var handler RequestHandler = new(RequestHandler)
-
-	c := appengine.NewContext(r)
-	handler.MyContext = &c
-
-	u := user.Current(handler.Context)
-	handler.MyUser = &u
-
-	if handler.User == nil {
-		handler.Google_url, _ = user.LoginURL(handler.Context, "/")
-
-	} else {
-		handler.Google_url, _ = user.LogoutURL(handler.Context, "/")
-
-	}
-
-	handler.HandleRequest(w, r)
+	c := c.Infof("HandleRequest")
 
 	var mainTemplate = template.Must(template.ParseFiles(BASE_TEMPLATE, BASE_HEADER_TEMPLATE, BASE_FOOTER_TEMPLATE,
 		"./webwallet/templates/main.html"))
@@ -67,43 +70,17 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 		"user":  handler.User,
 	}
 
-	c.Infof("!templateParams[\"url\"]: %s", templateParams["url"])
-
 	if err := mainTemplate.Execute(w, templateParams); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-
 }
 
-//about Handler
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
+//main handler
+func mainHandler(w http.ResponseWriter, r *http.Request) {
+	handler := NewRequestHandler(w, r)
 
-	u := user.Current(c)
-
-	var url string
-
-	if u == nil {
-		url, _ = user.LoginURL(c, "/")
-
-	} else {
-		url, _ = user.LogoutURL(c, "/")
-
-	}
-
-	var mainTemplate = template.Must(template.ParseFiles(BASE_TEMPLATE, BASE_HEADER_TEMPLATE, BASE_FOOTER_TEMPLATE,
-		"./webwallet/templates/main.html"))
-
-	var templateParams = map[string]interface{}{
-		"title": "App title",
-		"url":   url,
-		"user":  u,
-	}
-
-	c.Infof("!templateParams[\"url\"]: %s", templateParams["url"])
-
-	if err := mainTemplate.Execute(w, templateParams); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	if &handler.Context != nil {
+		handler.HandleRequest(w, r)
 	}
 
 }
