@@ -8,9 +8,11 @@ import (
 )
 
 const (
-	BASE_TEMPLATE        string = "./webwallet/templates/base.html"
-	BASE_HEADER_TEMPLATE string = "./webwallet/templates/baseHeader.html"
-	BASE_FOOTER_TEMPLATE string = "./webwallet/templates/baseFooter.html"
+	BASE_TEMPLATE_DIR       string = "./static/templates/"
+	BASE_TEMPLATE_EXTENSION string = ".html"
+	BASE_TEMPLATE           string = BASE_TEMPLATE_DIR + "base" + BASE_TEMPLATE_EXTENSION
+	BASE_HEADER_TEMPLATE    string = BASE_TEMPLATE_DIR + "baseHeader" + BASE_TEMPLATE_EXTENSION
+	BASE_FOOTER_TEMPLATE    string = BASE_TEMPLATE_DIR + "baseFooter" + BASE_TEMPLATE_EXTENSION
 )
 
 //template view handler
@@ -88,7 +90,7 @@ func (handler *RequestHandler) HandleRequest(w http.ResponseWriter, r *http.Requ
 	}
 
 	var mainTemplate = template.Must(template.ParseFiles(BASE_TEMPLATE, BASE_HEADER_TEMPLATE, BASE_FOOTER_TEMPLATE,
-		"./webwallet/templates/"+handler.Template.GetConfig().TemplateName+".html"))
+		BASE_TEMPLATE_DIR+handler.Template.GetConfig().TemplateName+BASE_TEMPLATE_EXTENSION))
 
 	var applicationParams = map[string]interface{}{
 		"title": "App title",
