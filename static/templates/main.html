@@ -1,8 +1,19 @@
 {{define "content"}}
-
-	<h1>MAIN Webwallet application</h1>
 	
-	<button class="btn btn-primary">Add bitcoin address</button>
+	<div ng-controller="MainCtrl">
+		<h1>MAIN Webwallet application</h1>
+		
+		<button class="btn btn-primary">Add bitcoin address</button>
+
+		<table class="table table-striped table-bordered table-hover">
+			<tr ng-repeat="address in addresses">
+				<td>{{html "{{"}}address.name{{html "}}"}}</td>
+				<td>{{html "{{"}}address.snippet{{html "}}"}}</td>
+			</tr>
+		</table>
+
+</div>
+	
 	
 	
 {{end}}

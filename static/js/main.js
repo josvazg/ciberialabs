@@ -1,6 +1,13 @@
+function MainCtrl($scope) {
 
-$(document).ready(function() {
-	console.log('READY');
+	$scope.addresses = [ {
+		"name" : "XXXX",
+		"snippet" : "Savings"
+	}, {
+		"name" : "YYYY",
+		"snippet" : "Account"
+	} ];
 	
 	
-});
+
+}
