@@ -1,30 +1,45 @@
+<!DOCTYPE html>
+
 <html>
 
-<head>
-	<title>{{.title}}</title>
+  <head>
+    <title>{{.title}}</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet" type="text/css">
 	
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	
-	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-	
-	<script type="text/javascript" src="/js/main.js"></script>
-	
-</head>
+  </head>
+  
+  <body>
 
-<body>
 	{{define "document"}}
 	
 		{{template "header" .}}
 		
+    	<div class="container">
+
 		{{template "content" .}}
 		
 		{{template "footer" .}}
 		
+    	</div>
+    	
 	{{end}}
 	
 	{{template "document" .}}
-</body>
-
+    
+    <!-- JS LIBS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    
+    <!-- MAIN JS -->
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+  </body>
+  
 </html>
