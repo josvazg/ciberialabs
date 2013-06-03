@@ -16,6 +16,9 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
+			  {{if .user}}
+              <li><a href="/main">Main</a></li>
+			  {{end}}
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>
             </ul>
