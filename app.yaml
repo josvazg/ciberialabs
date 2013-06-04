@@ -8,8 +8,8 @@ handlers:
   static_dir: static/css
   expiration: "7d"
 
-- url: /images
-  static_dir: static/images
+- url: /img
+  static_dir: static/img
   expiration: "7d"
   
 - url: /js
@@ -17,8 +17,8 @@ handlers:
   expiration: "7d"
 
 - url: /favicon.ico
-  static_files: static/images/favicon.ico
-  upload: static/images/favicon.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon.ico
   mime_type: image/x-icon
 
 - url: /robots.txt
