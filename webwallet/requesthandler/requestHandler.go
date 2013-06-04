@@ -8,11 +8,13 @@ import (
 )
 
 const (
-	BASE_TEMPLATE_DIR       string = "./static/templates/"
-	BASE_TEMPLATE_EXTENSION string = ".html"
-	BASE_TEMPLATE           string = BASE_TEMPLATE_DIR + "base" + BASE_TEMPLATE_EXTENSION
-	BASE_HEADER_TEMPLATE    string = BASE_TEMPLATE_DIR + "baseHeader" + BASE_TEMPLATE_EXTENSION
-	BASE_FOOTER_TEMPLATE    string = BASE_TEMPLATE_DIR + "baseFooter" + BASE_TEMPLATE_EXTENSION
+	BASE_TEMPLATE_DIR         string = "./static/templates/"
+	BASE_TEMPLATE_EXTENSION   string = ".html"
+	BASE_TEMPLATE             string = BASE_TEMPLATE_DIR + "base" + BASE_TEMPLATE_EXTENSION
+	BASE_HEADER_TEMPLATE      string = BASE_TEMPLATE_DIR + "baseHeader" + BASE_TEMPLATE_EXTENSION
+	BASE_FOOTER_TEMPLATE      string = BASE_TEMPLATE_DIR + "baseFooter" + BASE_TEMPLATE_EXTENSION
+	BASE_TEMPLATE_LEFT_DELIM  string = "["
+	BASE_TEMPLATE_RIGHT_DELIM string = "]"
 )
 
 //template view handler
@@ -89,7 +91,9 @@ func (handler *RequestHandler) HandleRequest(w http.ResponseWriter, r *http.Requ
 
 	}
 
-	var mainTemplate = template.Must(template.ParseFiles(BASE_TEMPLATE, BASE_HEADER_TEMPLATE, BASE_FOOTER_TEMPLATE,
+	myTemplate := template.New("base.html").Delims("[[", "]]")
+
+	var mainTemplate = template.Must(myTemplate.ParseFiles(BASE_TEMPLATE, BASE_HEADER_TEMPLATE, BASE_FOOTER_TEMPLATE,
 		BASE_TEMPLATE_DIR+handler.Template.GetConfig().TemplateName+BASE_TEMPLATE_EXTENSION))
 
 	var applicationParams = map[string]interface{}{
