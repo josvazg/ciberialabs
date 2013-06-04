@@ -100,6 +100,7 @@ func (handler *RequestHandler) HandleRequest(w http.ResponseWriter, r *http.Requ
 		"title": "App title",
 		"url":   handler.Google_url,
 		"user":  handler.User,
+		"templateName": handler.Template.GetConfig().TemplateName,
 	}
 
 	var templateParams = handler.Template.HandleRequest(w, r)
