@@ -1,13 +1,35 @@
 function MainCtrl($scope) {
 
-	$scope.addresses = [ {
-		"name" : "XXXX",
-		"snippet" : "Savings"
-	}, {
-		"name" : "YYYY",
-		"snippet" : "Account"
-	} ];
-	
-	
+	var addresses = $scope.addresses = [];
+
+	$scope.newBtcAddress = '';
+	$scope.newBtcLabel = '';
+
+	$scope.addressCount = $scope.addresses.length;
+
+	$scope.$watch('addresses', function() {
+		$scope.addressCount = $scope.addresses.length;
+		console.log($scope.addressCount);
+	}, true);
+
+	$scope.addBtcAddress = function() {
+		var newBtcAddress = $scope.newBtcAddress.trim();
+		if (!newBtcAddress.length) {
+			return;
+		}
+
+		var newBtcLabel = $scope.newBtcLabel.trim();
+
+		addresses.push({
+			name : newBtcAddress,
+			label : newBtcLabel
+		});
+
+		$scope.newBtcAddress = '';
+		$scope.newBtcLabel = '';
+
+		$('#addBtcAddressModal').modal('hide');
+
+	};
 
 }
