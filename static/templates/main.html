@@ -4,7 +4,7 @@
 
   <h1>Your webwallet</h1>
 
-  <button class="btn btn-primary" href="#addBtcAddressModal" role="button" class="btn" data-toggle="modal">Add
+  <button class="btn btn-primary" href="#addBtcAddressModal" role="button" data-toggle="modal">Add
     bitcoin address</button>
 
   <br> <br> <span ng-hide="addressCount">Your address list is empty</span>
@@ -21,14 +21,17 @@
       <tr ng-repeat="address in addresses" ng-cloak>
         <td>{{ address.name }}</td>
         <td>{{ address.label }}</td>
-        <td><button class="btn btn-danger" ng-click="removeBtcAddress(address)">
+        <td>
+          <button class="btn btn-danger" href="#deleteBtcAddressModal" role="button" data-toggle="modal"
+            ng-click="openRemoveBtcAddress(address)">
             <i class="icon-trash icon-white"></i>
-          </button></td>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
 
-  <!-- Modal -->
+  <!-- Modal Add BTC Address -->
   <div id="addBtcAddressModal" class="modal hide fade" tabindex="-1" role="dialog"
     aria-labelledby="addBtcAddressModalLabel" aria-hidden="true">
     <form ng-submit="addBtcAddress()">
@@ -51,6 +54,27 @@
       </div>
     </form>
   </div>
+
+  <!-- Modal Delete BTC Address -->
+  <div id="deleteBtcAddressModal" class="modal hide fade" tabindex="-1" role="dialog"
+    aria-labelledby="deleteBtcAddressModalLabel" aria-hidden="true">
+    <form ng-submit="confirmRemoveBtcAddress()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="deleteBtcAddressModalLabel">Delete bitcoin address?</h3>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+          <label>Bitcoin address</label> <span class="help-block">{{removeBtcAddress.name}}</span>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+
 
 </div>
 

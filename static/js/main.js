@@ -4,6 +4,7 @@ function MainCtrl($scope) {
 
 	$scope.newBtcAddress = '';
 	$scope.newBtcLabel = '';
+	$scope.removeBtcAddress = '';
 
 	$scope.addressCount = $scope.addresses.length;
 
@@ -32,9 +33,14 @@ function MainCtrl($scope) {
 
 	};
 
-	$scope.removeBtcAddress = function(address) {
-		addresses.splice(addresses.indexOf(address), 1);
+	$scope.confirmRemoveBtcAddress = function() {
+		addresses.splice(addresses.indexOf($scope.removeBtcAddress), 1);
+		$('#deleteBtcAddressModal').modal('hide');
 
+	}
+
+	$scope.openRemoveBtcAddress = function(address) {
+		$scope.removeBtcAddress = address;
 	}
 
 }

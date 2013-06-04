@@ -9,12 +9,14 @@
         <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
       </button>
 
-      <a class="brand" href="/">Web wallet</a>
+      <a class="brand" href="/">Ciberialabs</a>
 
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li> [[if .user]]
-          <li><a href="/main">Main</a></li> [[end]]
+          <li class="active"><a href="/">Home</a></li>
+          [[if .user]]
+          <li><a href="/main">Web wallet</a></li>
+          [[end]]
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
@@ -23,7 +25,11 @@
 
       <div class="nav-collapse collapse pull-right">
         <ul class="nav">
-          <li>[[if not .user]] <a href="[[.url]]">Login</a> [[else]] <a href="[[.url]]">Logout</a>
+          <li>
+            [[if not .user]]
+            <a href="[[.url]]">Login</a>
+            [[else]]
+            <a href="[[.url]]">Logout</a>
             [[end]]
           </li>
         </ul>
