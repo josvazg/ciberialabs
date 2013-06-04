@@ -14,14 +14,14 @@
       <tr>
         <th>Address</th>
         <th>Label</th>
-        <th style="width: 2.5rem;">&nbsp;</th>
+        <th style="width: 3.5rem;">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="address in addresses" ng-cloak>
         <td>{{ address.name }}</td>
         <td>{{ address.label }}</td>
-        <td>
+        <td class="text-center">
           <button class="btn btn-danger" href="#deleteBtcAddressModal" role="button" data-toggle="modal"
             ng-click="openRemoveBtcAddress(address)">
             <i class="icon-trash icon-white"></i>
