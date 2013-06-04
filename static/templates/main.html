@@ -11,18 +11,22 @@
 	<br>
 	<br>
 
+	<span ng-hide="addressCount">Your address list is empty</span>
+	
 	<table class="table table-striped table-bordered table-hover"
 			ng-show="addressCount" ng-cloak>
 		<thead>
 			<tr>
 				<th>Address</th>
 				<th>Label</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="address in addresses">
+			<tr ng-repeat="address in addresses" ng-cloak>
 				<td>{{ address.name }}</td>
 				<td>{{ address.label }}</td>
+				<td><button class="btn btn-danger" ng-click="removeBtcAddress(address)"><i class="icon-trash icon-white"></i></button></td>
 			</tr>
 		</tbody>
 	</table>

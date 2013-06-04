@@ -32,4 +32,9 @@ function MainCtrl($scope) {
 
 	};
 
+	$scope.removeBtcAddress = function(address) {
+		addresses.splice(addresses.indexOf(address), 1);
+
+	}
+
 }
