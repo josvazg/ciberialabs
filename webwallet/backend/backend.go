@@ -14,29 +14,33 @@ const (
 
 // Social Account from Google, Facebook, Twitter...
 type SocialAccount struct {
-	provider SocialAccountProvider
-	name     string
-	email    string // if available
+	Provider SocialAccountProvider
+	Name     string
+	Email    string // if available
 }
 
-// WebWallet Account (linked to social accounts)
-type Account struct {
-	name   string
-	email  string // if available
-	social []SocialAccount
+// WebWallet User (linked to social accounts)
+type User struct {
+	Id       int // accound inmutable internal id
+	Name     string
+	Email    string // if available
+	Accounts []SocialAccount
 }
 
 // WebWallet Address
 type Address struct {
-	addr    string // 1... bitcoin formatted address or master address
-	account string // address name or alias as used by bitcoin clients
-	master  bool   // is this a master address, false means a plain?
+	Addr     string // 1... bitcoin formatted address or master address
+	Label    string // label as used by bitcoin clients
+	Master   bool   // is this a master address, false means a plain?
+	walletId Wallet // wallet to which this address belongs to
 }
 
-// Address Group
-type AddressGroup struct {
-	name      string    // The address group can have a name, for instance, "Long Term Savings"
-	addr      []Address // addresses on this group
-	balance   float64   // this is not stored but calculated everytime
-	timestamp time.Time // tells the time the balance was calculated
+// Wallet
+type Wallet struct {
+	Id        int       // wallet inmutable internal id
+	Name      string    // The address group can have a name, for instance, "Long Term Savings"
+	Addr      []Address // addresses on this group
+	Balance   float64   // this is not stored but calculated everytime
+	Timestamp time.Time // tells the time the balance was calculated
+	UserId    int       // User id to which this Wallet belongs to
 }
